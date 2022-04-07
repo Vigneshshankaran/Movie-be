@@ -13,7 +13,6 @@ app.use(express.json());
 
 
 const mongoString = process.env.DATABASE_URL;
-const port = process.env.PORT;
 
 
 const mongoose = require('mongoose');
@@ -36,6 +35,6 @@ app.get('/', (req, res) => {
 app.use('/api', moviesRouter)
 
 
-app.listen(port, () => {
-    console.log(`Server Started at ${port}`)
-})
+app.listen(process.env.PORT || 3000, function(){
+    console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+  });
