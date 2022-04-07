@@ -2,9 +2,6 @@ const express = require('express');
 const mongoose = require('mongoose');
 const Movies = require('../model/Movies');
 
-
-
-
 const moviesRouter = express.Router()
 
 //Post Method
