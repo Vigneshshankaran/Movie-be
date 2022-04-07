@@ -1,13 +1,14 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const Movies = require('../model/Movies');
-const {mongoose} = require('mongoose');
 
 
 
-const router = express.Router()
+
+const moviesRouter = express.Router()
 
 //Post Method
-router.post('/post', async (req, res) => {
+moviesRouter.post('/post', async (req, res) => {
     const data = new Movies({
         name: req.body.name,
         rating: req.body.rating,
@@ -26,7 +27,7 @@ router.post('/post', async (req, res) => {
 })
 
 //Get all Method
-router.get('/getAll', async (req, res) => {
+moviesRouter.get('/getAll', async (req, res) => {
     try{
         const data = await Movies.find();
         res.json(data)
@@ -36,7 +37,7 @@ router.get('/getAll', async (req, res) => {
     }
 })
 //Get by ID Method
-router.get('/getOne/:id', async (req, res) => {
+moviesRouter.get('/getOne/:id', async (req, res) => {
     try{
         const data = await Movies.findById(req.params.id);
         res.json(data)
@@ -46,7 +47,7 @@ router.get('/getOne/:id', async (req, res) => {
     }
 })
 //Update by ID Method
-router.patch('/update/:id', async (req, res) => {
+moviesRouter.patch('/update/:id', async (req, res) => {
     try {
         const id = req.params.id;
         const updatedData = req.body;
@@ -63,7 +64,7 @@ router.patch('/update/:id', async (req, res) => {
     }
 })
 //Delete by ID Method
-router.delete('/delete/:id', async (req, res) => {
+moviesRouter.delete('/delete/:id', async (req, res) => {
     try {
         const id = req.params.id;
         const data = await Movies.findByIdAndDelete(id)
@@ -73,4 +74,4 @@ router.delete('/delete/:id', async (req, res) => {
         res.status(400).json({ message: error.message })
     }
 })
-module.exports = router;
+module.exports = moviesRouter;
